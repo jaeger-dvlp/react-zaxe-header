@@ -12,5 +12,5 @@
     "sourceType": "module"
   },
   "plugins": ["react", "prettier", "tailwind"],
-  "rules": { "semi": [0, "never"] }
+  "rules": {}
 }
