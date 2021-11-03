@@ -12,18 +12,21 @@ body {
   position: fixed;
   top: 0px;
   left: 0px;
+  z-index: 2;
 }
 
 .header-section {
   position: fixed;
-  top: 76px;
+  top: -800px;
   left: 0px;
+  transition: all 0.5s;
+  z-index: 1;
 }
 
 .zaxe-header,
 .zaxe-header * {
   font-family: Montserrat;
-  transition: all 0.2s !important;
+  transition: all 0.4s !important;
 }
 .header-section-button {
   font-weight: 500;
