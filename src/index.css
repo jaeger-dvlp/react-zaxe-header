@@ -8,28 +8,37 @@ body {
   min-height: 7000px;
 }
 
+* {
+  font-family: Montserrat;
+}
+
 .zaxe-header {
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 2;
+  -webkit-transition: all 0.2s, background-color 0.4s !important;
+  -ms-transition: all 0.2s, background-color 0.4s !important;
+  transition: all 0.2s, background-color 0.4s !important;
 }
 
 .header-section {
   position: fixed;
   top: -800px;
   left: 0px;
-  transition: all 0.5s;
-  z-index: 1;
+  -webkit-transition: all 0.5s !important;
+  -ms-transition: all 0.5s !important;
+  transition: all 0.5s !important;
 }
 
 .zaxe-header,
 .zaxe-header * {
-  font-family: Montserrat;
-  transition: all 0.4s !important;
+  transition: all 0.4s;
 }
 .header-section-button {
   font-weight: 500;
+  transition: all 0.2s !important;
+  -webkit-transition: all 0.2s !important;
+  -ms-transition: all 0.2s !important;
 }
 
 .header-button-border {
@@ -103,4 +112,40 @@ body {
   transform-origin: bottom;
   width: 50%;
   transform: translate(15px, -5px) rotatez(45deg);
+}
+
+/* !!  HEADER COLS !! */
+
+.header-col,
+.header-col * {
+  transition: all 0.2s;
+}
+
+.header-col div.header-col-content-head {
+  font-size: 1.5rem;
+}
+
+.header-col button.header-col-button {
+  background-color: #009ade;
+  color: white;
+  font-weight: 500;
+}
+
+.header-col button.header-col-button:hover {
+  background-color: black;
+  color: white;
+}
+
+@media only screen and (max-width: 1920px) {
+  .header-col div.header-col-content {
+    font-size: calc(1vw - 0.3rem) !important;
+  }
+
+  .header-col div.header-col-content-head {
+    font-size: calc(1.5vw - 0.3rem) !important;
+  }
+
+  .header-col button.header-col-button {
+    font-size: calc(1vw - 0.1rem) !important;
+  }
 }
