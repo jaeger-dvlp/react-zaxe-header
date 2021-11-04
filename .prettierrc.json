@@ -3,5 +3,6 @@
   "useTabs": false,
   "bracketSpacing": true,
   "singleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "function-paren-newline": "consisten"
 }
