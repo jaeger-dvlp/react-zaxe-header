@@ -8,6 +8,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import ZaxeLogoBlack from '../Images/zaxe_logo.svg';
 import ZaxeLogoWhite from '../Images/zaxe_logo_white.svg';
 
+import Z3Image from '../Images/Printers/z3.webp';
+import Z2Image from '../Images/Printers/z2.webp';
+import XLiteplusImage from '../Images/Printers/xliteplus.webp';
+
+import FilamentBlue from '../Images/Filaments/blueFla.webp';
+import FilamentGreen from '../Images/Filaments/greenFla.webp';
+import FilamentRed from '../Images/Filaments/redFla.webp';
+import FilamentYellow from '../Images/Filaments/yellowFla.webp';
+
 export default function Header() {
   const [headerBackground, setHeaderBackground] = useState(
     'bg-transparent text-gray-100',
@@ -15,11 +24,91 @@ export default function Header() {
 
   const [headerElements, setHeaderElements] = useState(null);
 
+  const [headerSections, setHeaderSections] = useState(null);
+
   const header = useRef();
+  const headerSection = useRef();
   const [logo, setLogo] = useState(ZaxeLogoWhite);
 
   useEffect(() => {
     let prevScroll = 0;
+
+    const headerSectionsToGo = [
+      {
+        slug: 'printers',
+        headerCols: [
+          {
+            name: 'Zaxe Z3',
+            slug: 'zaxe-z3',
+            image: Z3Image,
+            content:
+              '400 x 300 x 350 mm closed print volume with passive heating. Fully automatic and Z tilt calibration. 7” capacitive touchscreen. Your industrial solution partner with Wi-Fi, USB and Ethernet connectivity. ',
+            isRoute: true,
+            url: 'https://zaxe.com/z3',
+          },
+          {
+            name: 'Zaxe Z2',
+            slug: 'zaxe-z2',
+            image: Z2Image,
+            content:
+              '220 x 230 x 250 mm closed print volume with passive heating. Fully automatic calibration. 7” capacitive touchscreen. Designed as an affordable professionals with its Wi-Fi, USB and Ethernet connectivity. ',
+            isRoute: true,
+            url: 'https://zaxe.com/z3',
+          },
+          {
+            name: 'Zaxe xlite+',
+            slug: 'zaxe-xlitep',
+            image: XLiteplusImage,
+            content:
+              '220 x 230 x 200 mm print volume Fully automatic calibration. 5” capacitive touchscreen. Bring your productivity to your desk with Wifi, USB, micro USB and ethernet connectivity. ',
+            isRoute: true,
+            url: 'https://zaxe.com/xlite-p',
+          },
+        ],
+      },
+      {
+        slug: 'materials',
+        headerCols: [
+          {
+            name: 'Zaxe ABS',
+            slug: 'zaxe-abs',
+            image: FilamentBlue,
+            content:
+              'Zaxe ABS is a plastic from petrol. Preferred for professional prints for its strength and heat resistance.',
+            isRoute: true,
+            url: 'https://zaxe.com/materials/',
+          },
+          {
+            name: 'Zaxe PLA',
+            slug: 'zaxe-pla',
+            image: FilamentGreen,
+            content:
+              'Zaxe PLA is a bio-plastic component made with cornstarch as its base material.',
+            isRoute: true,
+            url: 'https://zaxe.com/materials/',
+          },
+          {
+            name: 'Zaxe PETG',
+            slug: 'zaxe-petg',
+            image: FilamentRed,
+            content:
+              'Zaxe PETG, a copolyester material with high impact resistance, has a very low shrinkage coefficient. ',
+            isRoute: true,
+            url: 'https://zaxe.com/materials/',
+          },
+          {
+            name: 'Zaxe FLEX',
+            slug: 'zaxe-flex',
+            image: FilamentYellow,
+            content:
+              'Zaxe Flex can be used in your special applications with its flexible structre.',
+            isRoute: true,
+            url: 'https://zaxe.com/materials/',
+          },
+        ],
+      },
+    ];
+
     const headerButtons = [
       { name: '3D Printers', slug: 'printers', isDropdown: true },
       { name: 'Materials', slug: 'materials', isDropdown: true },
@@ -97,9 +186,6 @@ export default function Header() {
       setLogo(ZaxeLogoBlack);
       document.querySelector(
         `.header-section.header-section-${sessionName}`,
-      ).style.transition = 'all 0.5s';
-      document.querySelector(
-        `.header-section.header-section-${sessionName}`,
       ).style.top = `${header.current.offsetHeight}px`;
     };
 
@@ -108,7 +194,6 @@ export default function Header() {
         // eslint-disable-next-line no-param-reassign
         section.style.top = `-${section.offsetHeight + 40}px`;
         // eslint-disable-next-line no-param-reassign
-        section.style.transition = 'all 0.2s';
       });
     };
 
@@ -122,30 +207,98 @@ export default function Header() {
     };
 
     setHeaderElements(
-      headerButtons.map((elm) => (
-        <button
-          key={elm.slug}
-          onFocus={
-            elm.isDropdown
-              ? () => {
-                  changeHeaderBG('section', true);
-                  activateSection(elm.slug);
-                }
-              : () => window.location.assign(`${elm.url}`)
-          }
-          onBlur={() => {
-            changeHeader();
-            changeHeaderBG('scroll', false);
-            deactivateAllSections();
-          }}
-          className="transition-all duration-200 header-section-button break-normal transform focus:scale-110 justify-center flex-wrap mx-3 p-0"
-          type="button"
+      // eslint-disable-next-line no-confusing-arrow
+      headerButtons.map(
+        // eslint-disable-next-line no-confusing-arrow
+        (elm) =>
+          // eslint-disable-next-line implicit-arrow-linebreak
+          elm.isDropdown === true ? (
+            <button
+              key={elm.slug}
+              onClick={() => {
+                deactivateAllSections();
+                changeHeaderBG('section', true);
+                activateSection(elm.slug);
+              }}
+              className=" header-section-button break-normal transform focus:scale-110 justify-center flex-wrap mx-3 p-0 header-sect-clickable"
+              type="button"
+            >
+              <div className="button-text w-full my-1 header-sect-clickable">
+                {elm.name}
+              </div>
+              <div className="header-button-border my-auto mx-auto header-sect-clickable" />
+            </button>
+          ) : (
+            <a
+              className="p-0 justify-center flex-wrap content-center flex m-0"
+              href={elm.url}
+            >
+              <button
+                key={elm.slug}
+                className=" header-section-button break-normal transform focus:scale-110 justify-center flex-wrap mx-3 p-0 header-sect-clickable"
+                type="button"
+              >
+                <div className="button-text w-full my-1 header-sect-clickable">
+                  {elm.name}
+                </div>
+                <div className="header-button-border my-auto mx-auto header-sect-clickable" />
+              </button>
+            </a>
+          ),
+        // eslint-disable-next-line function-paren-newline
+      ),
+    );
+
+    setHeaderSections(
+      headerSectionsToGo.map((theSection) => (
+        <div
+          ref={headerSection}
+          key={`sectionOf${theSection.slug}`}
+          className={`header-sect-clickable z-10 header-section shadow-xl rounded-b-3xl px-10 py-10 justify-center lg:flex xl:flex hidden header-section-${theSection.slug} w-full bg-white ${headerBackground}`}
         >
-          <div className="button-text w-full my-1">{elm.name}</div>
-          <div className="header-button-border my-auto mx-auto" />
-        </button>
+          {theSection.headerCols.map((theCol) => (
+            <div
+              key={`colOf${theSection.slug}/${theCol.slug}`}
+              style={{ maxWidth: '37rem' }}
+              className={`header-sect-clickable w-1/${theSection.headerCols.length} flex flex-wrap header-col m-2 rounded-xl transition duration-200 hover:shadow-lg hover:bg-gray-100 content-end justify-center p-4`}
+            >
+              <div className="header-sect-clickable w-1/2 header-col-img-container flex flex-wrap justify-center content-end p-0 m-0">
+                <img
+                  src={theCol.image}
+                  width="100%"
+                  className={`header-sect-clickable ${
+                    theSection.slug === 'materials'
+                      ? ' lg:px-1  xl:px-5 px-0  '
+                      : ''
+                  } transform scale-105 max-h-80`}
+                  alt={`header-col-${theCol.slug}-img`}
+                />
+              </div>
+              <div className="header-sect-clickable w-1/2 p-2 content-end header-col-content-container flex flex-wrap">
+                <div className="header-sect-clickable header-col-content-head font-bold text-gray-500 w-full m-0 p-0 py-0">
+                  {theCol.name}
+                </div>
+                <div className="header-sect-clickable header-col-content text-gray-800 pb-4 pt-2 w-full p-0 m-0">
+                  {theCol.content}
+                </div>
+                <a
+                  className="header-sect-clickable w-full m-0 p-0"
+                  href={theCol.url}
+                >
+                  <button
+                    type="button"
+                    className="header-sect-clickable w-full header-col-button m-0 py-2 rounded-lg"
+                  >
+                    Learn More
+                  </button>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
       )),
     );
+
     const leaveAllFocuses = () => {
       document.querySelectorAll(':focus').forEach((elm) => {
         elm.blur();
@@ -166,17 +319,21 @@ export default function Header() {
       leaveAllFocuses();
       deactivateAllSections();
     };
+    window.onclick = (e) => {
+      if (e.target.classList.contains('header-sect-clickable') === false) {
+        deactivateAllSections();
+      }
+    };
   }, []);
 
   return (
-    <div className="w-full fixed top-0 left-0">
+    <>
       <div
         ref={header}
         id="zaxe-header"
-        style={{ transition: '0.2s' }}
-        className={`zaxe-header fill-current text-lg w-full grid grid-cols-4 lg:px-40 xl:lg:px-40 px-2  py-5 ${headerBackground} flex-wrap align-middle content-center`}
+        className={`header-sect-clickable z-20 zaxe-header fill-current text-lg w-full grid grid-cols-4 lg:px-40 xl:lg:px-40 px-2  py-5 ${headerBackground} flex-wrap align-middle content-center`}
       >
-        <div className="flex lg:col-span-1 xl:col-span-1 col-span-4 lg:justify-start xl:justify-start justify-between content-center  p-0">
+        <div className="header-sect-clickable header-left flex lg:col-span-1 xl:col-span-1 col-span-4 lg:justify-start xl:justify-start justify-between content-center  p-0">
           <label
             className="lg:hidden xl:hidden flex flex-col"
             htmlFor="navmeMenuCheck"
@@ -188,9 +345,14 @@ export default function Header() {
           </label>
           <a
             href="https://zaxe.com"
-            className="cursor-pointer flex  lg:justify-start xl:justify-start justify-center content-center  p-0 m-0 transform filter hover:drop-shadow-lg hover:scale-125 drop-shadow-none"
+            className="header-sect-clickable cursor-pointer flex  lg:justify-start xl:justify-start justify-center content-center  p-0 m-0 transform filter hover:drop-shadow-lg hover:scale-125 drop-shadow-none"
           >
-            <img src={logo} width="90" alt="zaxe_logo" />
+            <img
+              className="header-sect-clickable"
+              src={logo}
+              width="90"
+              alt="zaxe_logo"
+            />
           </a>
           <button className="xl:hidden lg:hidden block" type="button">
             <svg
@@ -205,20 +367,12 @@ export default function Header() {
             </svg>
           </button>
         </div>
-        <div className="col-span-3 xl:flex lg:flex justify-end content-center  hidden p-0">
+        <div className="header-sect-clickable col-span-3 xl:flex lg:flex justify-end content-center  hidden p-0">
           {headerElements}
         </div>
       </div>
-      <div
-        className={`header-section shadow-xl rounded-b-3xl px-20 py-40 flex w-full header-section-printers ${headerBackground}`}
-      >
-        <div className="w-1/4 ">print</div>
-      </div>
-      <div
-        className={`header-section shadow-xl rounded-b-3xl px-20 py-40 flex w-full header-section-materials ${headerBackground}`}
-      >
-        <div className="w-1/4 ">mat</div>
-      </div>
-    </div>
+
+      {headerSections}
+    </>
   );
 }
