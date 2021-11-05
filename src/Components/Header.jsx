@@ -290,7 +290,7 @@ export default function Header() {
           onClick={(e) => {
             e.target.focus();
           }}
-          className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 pt-5 border-b border-gray-300 pb-2  text-left "
+          className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 mx-5 border-b border-gray-300 pb-2 text-left "
         >
           <div>{theSection.text}</div>
           <div className="w-full flex flex-wrap mobil-header-category-items ">
