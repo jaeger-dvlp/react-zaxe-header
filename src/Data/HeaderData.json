@@ -1,0 +1,115 @@
+[
+  {
+    "name": "3D Printers",
+    "text": "3D Printers",
+    "slug": "printers",
+    "headerCols": [
+      {
+        "name": "Zaxe Z3",
+        "slug": "zaxe-z3",
+        "image": "{Z3Image}",
+        "content": "400 x 300 x 350 mm closed print volume with passive heating. Fully automatic and Z tilt calibration. 7” capacitive touchscreen. Your industrial solution partner with Wi-Fi, USB and Ethernet connectivity. ",
+        "isRoute": true,
+        "url": "https://zaxe.com/z3"
+      },
+      {
+        "name": "Zaxe Z2",
+        "slug": "zaxe-z2",
+        "image": "{Z2Image}",
+        "content": "220 x 230 x 250 mm closed print volume with passive heating. Fully automatic calibration. 7” capacitive touchscreen. Designed as an affordable professionals with its Wi-Fi, USB and Ethernet connectivity. ",
+        "isRoute": true,
+        "url": "https://zaxe.com/z3"
+      },
+      {
+        "name": "Zaxe xlite+",
+        "slug": "zaxe-xlitep",
+        "image": "{XLiteplusImage}",
+        "content": "220 x 230 x 200 mm print volume Fully automatic calibration. 5” capacitive touchscreen. Bring your productivity to your desk with Wifi, USB, micro USB and ethernet connectivity. ",
+        "isRoute": true,
+        "url": "https://zaxe.com/xlite-p"
+      }
+    ],
+    "isDropdown": true
+  },
+  {
+    "name": "Materials",
+    "text": "Materials",
+    "slug": "materials",
+    "headerCols": [
+      {
+        "name": "Zaxe ABS",
+        "slug": "zaxe-abs",
+        "image": "{FilamentBlue}",
+        "content": "Zaxe ABS is a plastic from petrol. Preferred for professional prints for its strength and heat resistance.",
+        "isRoute": true,
+        "url": "https://zaxe.com/materials/"
+      },
+      {
+        "name": "Zaxe PLA",
+        "slug": "zaxe-pla",
+        "image": "{FilamentGreen}",
+        "content": "Zaxe PLA is a bio-plastic component made with cornstarch as its base material.",
+        "isRoute": true,
+        "url": "https://zaxe.com/materials/"
+      },
+      {
+        "name": "Zaxe PETG",
+        "slug": "zaxe-petg",
+        "image": "{FilamentRed}",
+        "content": "Zaxe PETG, a copolyester material with high impact resistance, has a very low shrinkage coefficient. ",
+        "isRoute": true,
+        "url": "https://zaxe.com/materials/"
+      },
+      {
+        "name": "Zaxe FLEX",
+        "slug": "zaxe-flex",
+        "image": "FilamentYellow",
+        "content": "Zaxe Flex can be used in your special applications with its flexible structre.",
+        "isRoute": true,
+        "url": "https://zaxe.com/materials/"
+      }
+    ],
+    "isDropdown": true
+  },
+  {
+    "name": "xDesktop",
+    "text": "xDesktop",
+    "slug": "xdesktop",
+
+    "headerCols": "",
+    "url": "https://zaxe.com/xdesktop",
+    "isDropdown": false
+  },
+  {
+    "name": "Support",
+    "text": "Support",
+    "slug": "support",
+
+    "headerCols": "",
+    "url": "https://support.zaxe.com",
+    "isDropdown": false
+  },
+  {
+    "name": "Store",
+    "text": "Store",
+    "slug": "store",
+
+    "headerCols": "",
+    "url": "https://store.zaxe.com",
+    "isDropdown": false
+  },
+  {
+    "name": "{AccountIcon}",
+    "text": "Login",
+    "slug": "account",
+    "url": "https://store.zaxe.com/account",
+    "isDropdown": false
+  },
+  {
+    "name": "{CartIcon}",
+    "text": "Cart",
+    "slug": "cart",
+    "url": "https://store.zaxe.com/cart",
+    "isDropdown": false
+  }
+]
