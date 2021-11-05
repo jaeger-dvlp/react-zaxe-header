@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-return-assign */
 /* eslint-disable indent */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -284,31 +285,45 @@ export default function Header() {
     );
 
     setHeaderMobilElements(
-      headerButtons.map((theSection) => (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.target.focus();
-          }}
-          className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 mt-5 border-b border-gray-300 pb-2 text-left "
-        >
-          <div>{theSection.text}</div>
-          <div className="w-full flex flex-wrap mobil-header-category-items ">
-            {theSection.headerCols
-              ? theSection.headerCols.map((headerCol) => (
-                  // eslint-disable-next-line react/jsx-indent
-                  <a
-                    href="https://google.com"
-                    className="w-full py-1 text-gray-700"
-                  >
-                    {headerCol.name}
-                  </a>
-                ))
-              : ''}
-          </div>
-        </button>
-      )),
+      headerButtons.map(
+        // eslint-disable-next-line no-confusing-arrow
+        (theSection) =>
+          // eslint-disable-next-line no-nested-ternary
+          theSection.isDropdown === true ? (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.target.focus();
+              }}
+              className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 mt-5 border-b border-gray-300 pb-2 text-left "
+            >
+              <div>{theSection.text}</div>
+              <div className="w-full flex flex-wrap mobil-header-category-items ">
+                {theSection.headerCols
+                  ? theSection.headerCols.map((headerCol) => (
+                      // eslint-disable-next-line react/jsx-indent
+                      <a
+                        href={headerCol.url}
+                        className="w-full py-1 text-gray-700"
+                      >
+                        {headerCol.name}
+                      </a>
+                    ))
+                  : ''}
+              </div>
+            </button>
+          ) : (
+            <a
+              href={theSection.url}
+              className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 mt-5 border-b border-gray-300 pb-2 text-left "
+            >
+              {theSection.text}
+            </a>
+          ),
+      ),
     );
+
+    // eslint-disable-next-line function-paren-newline
 
     setHeaderSections(
       headerButtons.map((theSection) => (
