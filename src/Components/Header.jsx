@@ -345,7 +345,7 @@ export default function Header() {
         // eslint-disable-next-line no-nested-ternary
         prevScroll >= window.scrollY
           ? changeHeader(true)
-          : window.scrollY !== 0
+          : window.scrollY > 0
           ? changeHeader(false)
           : null;
       }
