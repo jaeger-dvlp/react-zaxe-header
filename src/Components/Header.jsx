@@ -340,14 +340,14 @@ export default function Header() {
       } else {
         changeHeaderBG('scroll');
       }
+
       if (sideBarToggle.current.checked !== true) {
+        // eslint-disable-next-line no-nested-ternary
         prevScroll >= window.scrollY
           ? changeHeader(true)
-          : () => {
-              if (!window.scrollY < 0 && window.scrollY !== 0) {
-                changeHeader(false);
-              }
-            };
+          : window.scrollY !== 0
+          ? changeHeader(false)
+          : null;
       }
     };
 
