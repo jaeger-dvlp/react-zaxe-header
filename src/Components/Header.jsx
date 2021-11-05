@@ -35,6 +35,7 @@ export default function Header() {
 
     const headerSectionsToGo = [
       {
+        name: '3D Printers',
         slug: 'printers',
         headerCols: [
           {
@@ -67,6 +68,7 @@ export default function Header() {
         ],
       },
       {
+        name: 'Materials',
         slug: 'materials',
         headerCols: [
           {
@@ -287,7 +289,7 @@ export default function Header() {
                 >
                   <button
                     type="button"
-                    className="header-sect-clickable w-full header-col-button m-0 py-2 rounded-lg"
+                    className="header-sect-clickable transition-all duration-200 w-full header-col-button m-0 py-2 rounded-lg"
                   >
                     Learn More
                   </button>
@@ -345,7 +347,7 @@ export default function Header() {
           </label>
           <a
             href="https://zaxe.com"
-            className="header-sect-clickable cursor-pointer flex  lg:justify-start xl:justify-start justify-center content-center  p-0 m-0 transform filter hover:drop-shadow-lg hover:scale-125 drop-shadow-none"
+            className="header-sect-clickable cursor-pointer flex  lg:justify-start xl:justify-start justify-center content-center transition-all duration-300  p-0 m-0 transform filter hover:drop-shadow-lg hover:scale-125 drop-shadow-none"
           >
             <img
               className="header-sect-clickable"
