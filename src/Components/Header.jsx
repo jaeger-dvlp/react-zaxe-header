@@ -24,7 +24,7 @@ export default function Header() {
 
   const [headerElements, setHeaderElements] = useState(null);
   const [headerSections, setHeaderSections] = useState(null);
-  const [, /* headerMobilElements */ setHeaderMobilElements] = useState(null);
+  const [headerMobilElements, setHeaderMobilElements] = useState(null);
 
   const header = useRef();
   const headerSection = useRef();
@@ -35,9 +35,10 @@ export default function Header() {
   useEffect(() => {
     let prevScroll = 0;
 
-    const headerSectionsToGo = [
+    const headerButtons = [
       {
         name: '3D Printers',
+        text: '3D Printers',
         slug: 'printers',
         headerCols: [
           {
@@ -68,9 +69,11 @@ export default function Header() {
             url: 'https://zaxe.com/xlite-p',
           },
         ],
+        isDropdown: true,
       },
       {
         name: 'Materials',
+        text: 'Materials',
         slug: 'materials',
         headerCols: [
           {
@@ -110,27 +113,32 @@ export default function Header() {
             url: 'https://zaxe.com/materials/',
           },
         ],
+        isDropdown: true,
       },
-    ];
-
-    const headerButtons = [
-      { name: '3D Printers', slug: 'printers', isDropdown: true },
-      { name: 'Materials', slug: 'materials', isDropdown: true },
       {
         name: 'xDesktop',
+        text: 'xDesktop',
         slug: 'xdesktop',
+
+        headerCols: '',
         url: 'https://zaxe.com/xdesktop',
         isDropdown: false,
       },
       {
         name: 'Support',
+        text: 'Support',
         slug: 'support',
+
+        headerCols: '',
         url: 'https://support.zaxe.com',
         isDropdown: false,
       },
       {
         name: 'Store',
+        text: 'Store',
         slug: 'store',
+
+        headerCols: '',
         url: 'https://store.zaxe.com',
         isDropdown: false,
       },
@@ -146,6 +154,7 @@ export default function Header() {
             <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-3.123 0-5.914-1.441-7.749-3.69.259-.588.783-.995 1.867-1.246 2.244-.518 4.459-.981 3.393-2.945-3.155-5.82-.899-9.119 2.489-9.119 3.322 0 5.634 3.177 2.489 9.119-1.035 1.952 1.1 2.416 3.393 2.945 1.082.25 1.61.655 1.871 1.241-1.836 2.253-4.628 3.695-7.753 3.695z" />
           </svg>
         ),
+        text: 'Login',
         slug: 'account',
         url: 'https://store.zaxe.com/account',
         isDropdown: false,
@@ -163,6 +172,7 @@ export default function Header() {
             <path d="M4 6.414L.757 3.172l1.415-1.415L5.414 5h15.242a1 1 0 0 1 .958 1.287l-2.4 8a1 1 0 0 1-.958.713H6v2h11v2H5a1 1 0 0 1-1-1V6.414zM5.5 23a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm12 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
           </svg>
         ),
+        text: 'Cart',
         slug: 'cart',
         url: 'https://store.zaxe.com/cart',
         isDropdown: false,
@@ -197,7 +207,6 @@ export default function Header() {
       document.querySelectorAll('.header-section').forEach((section) => {
         // eslint-disable-next-line no-param-reassign
         section.style.top = `-${section.offsetHeight + 40}px`;
-        // eslint-disable-next-line no-param-reassign
       });
     };
 
@@ -233,7 +242,6 @@ export default function Header() {
     });
 
     setHeaderElements(
-      // eslint-disable-next-line no-confusing-arrow
       headerButtons.map(
         // eslint-disable-next-line no-confusing-arrow
         (elm) =>
@@ -256,11 +264,11 @@ export default function Header() {
             </button>
           ) : (
             <a
+              key={elm.slug}
               className="p-0 justify-center  flex-wrap content-center flex m-0"
               href={elm.url}
             >
               <button
-                key={elm.slug}
                 className=" header-section-button break-normal transform focus:scale-110 justify-center flex-wrap mx-3 p-0 header-sect-clickable"
                 type="button"
               >
@@ -275,54 +283,79 @@ export default function Header() {
       ),
     );
 
-    setHeaderMobilElements();
+    setHeaderMobilElements(
+      headerButtons.map((theSection) => (
+        <button
+          type="button"
+          className="w-full mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 pt-5 border-b border-gray-300 pb-2  text-left "
+        >
+          <div>{theSection.text}</div>
+          <div className="w-full flex flex-wrap mobil-header-category-items ">
+            {theSection.headerCols
+              ? theSection.headerCols.map((headerCol) => (
+                  // eslint-disable-next-line react/jsx-indent
+                  <a
+                    href="https://google.com"
+                    className="w-full py-1 text-gray-700"
+                  >
+                    {headerCol.name}
+                  </a>
+                ))
+              : ''}
+          </div>
+        </button>
+      )),
+    );
 
     setHeaderSections(
-      headerSectionsToGo.map((theSection) => (
+      headerButtons.map((theSection) => (
         <div
           ref={headerSection}
           key={`sectionOf${theSection.slug}`}
           className={`header-sect-clickable z-10 header-section shadow-xl rounded-b-3xl px-10 py-10 justify-center lg:flex xl:flex hidden header-section-${theSection.slug} w-full bg-white ${headerBackground}`}
         >
-          {theSection.headerCols.map((theCol) => (
-            <div
-              key={`colOf${theSection.slug}/${theCol.slug}`}
-              style={{ maxWidth: '37rem' }}
-              className={`header-sect-clickable w-1/${theSection.headerCols.length} flex flex-wrap header-col m-2 rounded-xl transition duration-200 hover:shadow-lg hover:bg-gray-100 content-end justify-center p-4`}
-            >
-              <div className="header-sect-clickable w-1/2 header-col-img-container flex flex-wrap justify-center content-end p-0 m-0">
-                <img
-                  src={theCol.image}
-                  width="100%"
-                  className={`header-sect-clickable ${
-                    theSection.slug === 'materials'
-                      ? ' lg:px-1  xl:px-5 px-0  '
-                      : ''
-                  } transform scale-105 max-h-80`}
-                  alt={`header-col-${theCol.slug}-img`}
-                />
-              </div>
-              <div className="header-sect-clickable w-1/2 p-2 content-end header-col-content-container flex flex-wrap">
-                <div className="header-sect-clickable header-col-content-head font-bold text-gray-500 w-full m-0 p-0 py-0">
-                  {theCol.name}
-                </div>
-                <div className="header-sect-clickable header-col-content text-gray-800 pb-4 pt-2 w-full p-0 m-0">
-                  {theCol.content}
-                </div>
-                <a
-                  className="header-sect-clickable w-full m-0 p-0"
-                  href={theCol.url}
+          {theSection.headerCols
+            ? theSection.headerCols.map((theCol) => (
+                // eslint-disable-next-line react/jsx-indent
+                <div
+                  key={`colOf${theSection.slug}/${theCol.slug}`}
+                  style={{ maxWidth: '37rem' }}
+                  className={`header-sect-clickable w-1/${theSection.headerCols.length} flex flex-wrap header-col m-2 rounded-xl transition duration-200 hover:shadow-lg hover:bg-gray-100 content-end justify-center p-4`}
                 >
-                  <button
-                    type="button"
-                    className="header-sect-clickable transition-all duration-200 w-full header-col-button m-0 py-2 rounded-lg"
-                  >
-                    Learn More
-                  </button>
-                </a>
-              </div>
-            </div>
-          ))}
+                  <div className="header-sect-clickable w-1/2 header-col-img-container flex flex-wrap justify-center content-end p-0 m-0">
+                    <img
+                      src={theCol.image}
+                      width="100%"
+                      className={`header-sect-clickable ${
+                        theSection.slug === 'materials'
+                          ? ' lg:px-1  xl:px-5 px-0  '
+                          : ''
+                      } transform scale-105 max-h-80`}
+                      alt={`header-col-${theCol.slug}-img`}
+                    />
+                  </div>
+                  <div className="header-sect-clickable w-1/2 p-2 content-end header-col-content-container flex flex-wrap">
+                    <div className="header-sect-clickable header-col-content-head font-bold text-gray-500 w-full m-0 p-0 py-0">
+                      {theCol.name}
+                    </div>
+                    <div className="header-sect-clickable header-col-content text-gray-800 pb-4 pt-2 w-full p-0 m-0">
+                      {theCol.content}
+                    </div>
+                    <a
+                      className="header-sect-clickable w-full m-0 p-0"
+                      href={theCol.url}
+                    >
+                      <button
+                        type="button"
+                        className="header-sect-clickable transition-all duration-200 w-full header-col-button m-0 py-2 rounded-lg"
+                      >
+                        Learn More
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              ))
+            : ''}
         </div>
       )),
     );
@@ -418,7 +451,9 @@ export default function Header() {
         ref={sideBar}
         className="w-full h-0  px-4 top-0 mobil-side-bar fixed overflow-hidden left-0 lg:hidden xl:hidden flex flex-wrap bg-white transition-all duration-300 "
       >
-        a
+        <div className="w-full text-xl transition-all duration-400 flex justify-center content-start flex-wrap ">
+          {headerMobilElements}
+        </div>
       </div>
       {headerSections}
     </>
