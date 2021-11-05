@@ -139,6 +139,22 @@
     color: white;
   }
 
+  .mobil-header-category {
+    transition: all 0.5s !important;
+  }
+
+  .mobil-header-category-items {
+    overflow: hidden;
+    max-height: 0px;
+    transition: all 0.5s !important;
+  }
+
+  .mobil-header-category:focus-within .mobil-header-category-items {
+    transition: all 0.5s !important;
+    max-height: 500px;
+    padding: 1rem !important;
+  }
+
   @media only screen and (max-width: 1920px) {
     .header-col div.header-col-content {
       font-size: calc(1vw - 0.3rem) !important;
