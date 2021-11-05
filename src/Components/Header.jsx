@@ -24,7 +24,7 @@ export default function Header() {
 
   const [headerElements, setHeaderElements] = useState(null);
   const [headerSections, setHeaderSections] = useState(null);
-  const [headerMobilElements, setHeaderMobilElements] = useState(null);
+  const [, /* headerMobilElements */ setHeaderMobilElements] = useState(null);
 
   const header = useRef();
   const headerSection = useRef();
@@ -213,12 +213,12 @@ export default function Header() {
 
     const activateSideBar = () => {
       sideBar.current.style.height = '100vh';
+      sideBar.current.style.paddingTop = '5rem';
     };
     const disableSideBar = () => {
       sideBar.current.style.height = '0px';
+      sideBar.current.style.paddingTop = '0rem';
     };
-
-    console.log(headerMobilElements);
 
     sideBarToggle.current.addEventListener('change', () => {
       if (sideBarToggle.current.checked === true) {
@@ -256,7 +256,7 @@ export default function Header() {
             </button>
           ) : (
             <a
-              className="p-0 justify-center flex-wrap content-center flex m-0"
+              className="p-0 justify-center  flex-wrap content-center flex m-0"
               href={elm.url}
             >
               <button
@@ -333,10 +333,6 @@ export default function Header() {
       });
     };
     window.onscroll = () => {
-      sideBar.current.style.top = `${
-        header.current.offsetHeight + parseInt(header.current.style.top, 10)
-      }px`;
-
       leaveAllFocuses();
 
       if (window.innerWidth <= 768 && sideBarToggle.current.checked !== false) {
@@ -414,7 +410,7 @@ export default function Header() {
       </div>
       <div
         ref={sideBar}
-        className="w-full fixed overflow-hidden left-0 lg:hidden xl:hidden flex flex-wrap bg-white transition-all duration-300 "
+        className="w-full h-0  px-4 top-0 mobil-side-bar fixed overflow-hidden left-0 lg:hidden xl:hidden flex flex-wrap bg-white transition-all duration-300 "
       >
         a
       </div>
