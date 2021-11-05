@@ -183,6 +183,7 @@ export default function Header() {
       },
     ];
 
+    // ! Change background colour of Header by request or scroll
     const changeHeaderBG = (condition, status) => {
       if (condition === 'scroll') {
         window.scrollY >= 900
@@ -198,7 +199,9 @@ export default function Header() {
             setHeaderBackground('bg-white bg-opacity-5 text-gray-100'));
       }
     };
+    // !
 
+    // ! Activate requested Desktop Header Dropdown Menu
     const activateSection = (sessionName) => {
       setHeaderBackground('bg-white text-black shadow-sm');
       setLogo(ZaxeLogoBlack);
@@ -207,13 +210,16 @@ export default function Header() {
       ).style.top = `${header.current.offsetHeight}px`;
     };
 
+    // ! Hide all Desktop Header Dropdown Menus
     const deactivateAllSections = () => {
       document.querySelectorAll('.header-section').forEach((section) => {
         // eslint-disable-next-line no-param-reassign
         section.style.top = `-${section.offsetHeight + 40}px`;
       });
     };
+    // !
 
+    // ! Change Header status by scroll & request
     const changeHeader = (status) => {
       deactivateAllSections();
 
@@ -223,16 +229,21 @@ export default function Header() {
 
       prevScroll = window.scrollY;
     };
+    // !
 
+    // ! Activate & Deactivate the Mobile Side Bar
     const activateSideBar = () => {
       sideBar.current.style.height = '100vh';
       sideBar.current.style.paddingTop = '5rem';
     };
+
     const disableSideBar = () => {
       sideBar.current.style.height = '0px';
       sideBar.current.style.paddingTop = '0rem';
     };
+    // !
 
+    // ! Handle Side Bar state change
     sideBarToggle.current.addEventListener('change', () => {
       if (sideBarToggle.current.checked === true) {
         changeHeaderBG('section', true);
@@ -244,7 +255,9 @@ export default function Header() {
           : changeHeaderBG('section', true);
       }
     });
+    // !
 
+    // ! Create Header Elements
     setHeaderElements(
       headerButtons.map(
         // eslint-disable-next-line no-confusing-arrow
@@ -286,7 +299,9 @@ export default function Header() {
         // eslint-disable-next-line function-paren-newline
       ),
     );
+    // !
 
+    // ! Create Mobile Side Bar Elements
     setHeaderMobilElements(
       headerButtons.map(
         // eslint-disable-next-line no-confusing-arrow
@@ -328,7 +343,9 @@ export default function Header() {
           ),
       ),
     );
+    // !
 
+    // ! Create Dropdowns of Desktop Header Eleements if exists
     setHeaderSections(
       headerButtons.map((theSection) => (
         <div
@@ -381,12 +398,17 @@ export default function Header() {
         </div>
       )),
     );
+    // !
 
+    // ! Leave all focus from Desktop Dropdown Menus
     const leaveAllFocuses = () => {
       document.querySelectorAll(':focus').forEach((elm) => {
         elm.blur();
       });
     };
+    // !
+
+    // ! Handle window on scroll and do jobs ( Hide header etc. )
     window.onscroll = () => {
       leaveAllFocuses();
 
@@ -405,23 +427,33 @@ export default function Header() {
           : null;
       }
     };
+    // !
 
+    // ! Handle window load & hide Mobile Side Bar & Dekstop Dropdown menus
     window.onload = () => {
+      deactivateAllSections();
       sideBarToggle.current.checked = false;
       changeHeaderBG('scroll');
     };
+    // !
 
+    // ! Handle window resize & Change states of Mobil Side Bar & Desktop Header Dropdowns
     window.onresize = () => {
       sideBarToggle.current.checked = false;
       leaveAllFocuses();
       deactivateAllSections();
       disableSideBar();
     };
+    // !
+
+    // !  Handle Window Click and if event target is not from Header or Header elements,
+    // ! hide all Desktop Header Dropdowns
     window.onclick = (e) => {
       if (e.target.classList.contains('header-sect-clickable') === false) {
         deactivateAllSections();
       }
     };
+    //!
   }, []);
 
   return (
