@@ -19,6 +19,32 @@ import FilamentRed from '../Images/Filaments/redFla.webp';
 import FilamentYellow from '../Images/Filaments/yellowFla.webp';
 
 export default function Header() {
+  const AccountIcon = (
+    <svg
+      className=" mx-1"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-3.123 0-5.914-1.441-7.749-3.69.259-.588.783-.995 1.867-1.246 2.244-.518 4.459-.981 3.393-2.945-3.155-5.82-.899-9.119 2.489-9.119 3.322 0 5.634 3.177 2.489 9.119-1.035 1.952 1.1 2.416 3.393 2.945 1.082.25 1.61.655 1.871 1.241-1.836 2.253-4.628 3.695-7.753 3.695z" />
+    </svg>
+  );
+
+  const CartIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="25"
+      height="25"
+      className="mx-1"
+    >
+      <path fill="none" d="M0 0h24v24H0z" />
+      <path d="M4 6.414L.757 3.172l1.415-1.415L5.414 5h15.242a1 1 0 0 1 .958 1.287l-2.4 8a1 1 0 0 1-.958.713H6v2h11v2H5a1 1 0 0 1-1-1V6.414zM5.5 23a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm12 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+    </svg>
+  );
+
+  const [logo, setLogo] = useState(ZaxeLogoWhite);
   const [headerBackground, setHeaderBackground] = useState(
     'bg-transparent text-gray-100',
   );
@@ -31,11 +57,9 @@ export default function Header() {
   const headerSection = useRef();
   const sideBarToggle = useRef();
   const sideBar = useRef();
-  const [logo, setLogo] = useState(ZaxeLogoWhite);
+  let prevScroll = 0;
 
   useEffect(() => {
-    let prevScroll = 0;
-
     const headerButtons = [
       {
         name: '3D Printers',
@@ -144,35 +168,14 @@ export default function Header() {
         isDropdown: false,
       },
       {
-        name: (
-          <svg
-            className=" mx-1"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-3.123 0-5.914-1.441-7.749-3.69.259-.588.783-.995 1.867-1.246 2.244-.518 4.459-.981 3.393-2.945-3.155-5.82-.899-9.119 2.489-9.119 3.322 0 5.634 3.177 2.489 9.119-1.035 1.952 1.1 2.416 3.393 2.945 1.082.25 1.61.655 1.871 1.241-1.836 2.253-4.628 3.695-7.753 3.695z" />
-          </svg>
-        ),
+        name: AccountIcon,
         text: 'Login',
         slug: 'account',
         url: 'https://store.zaxe.com/account',
         isDropdown: false,
       },
       {
-        name: (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="25"
-            height="25"
-            className="mx-1"
-          >
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path d="M4 6.414L.757 3.172l1.415-1.415L5.414 5h15.242a1 1 0 0 1 .958 1.287l-2.4 8a1 1 0 0 1-.958.713H6v2h11v2H5a1 1 0 0 1-1-1V6.414zM5.5 23a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm12 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-          </svg>
-        ),
+        name: CartIcon,
         text: 'Cart',
         slug: 'cart',
         url: 'https://store.zaxe.com/cart',
@@ -249,7 +252,7 @@ export default function Header() {
           // eslint-disable-next-line implicit-arrow-linebreak
           elm.isDropdown === true ? (
             <button
-              key={elm.slug}
+              key={`headerElm${elm.slug}`}
               onClick={() => {
                 deactivateAllSections();
                 changeHeaderBG('section', true);
@@ -265,7 +268,7 @@ export default function Header() {
             </button>
           ) : (
             <a
-              key={elm.slug}
+              key={`headerRoute${elm.slug}`}
               className="p-0 justify-center  flex-wrap content-center flex m-0"
               href={elm.url}
             >
@@ -291,6 +294,7 @@ export default function Header() {
           // eslint-disable-next-line no-nested-ternary
           theSection.isDropdown === true ? (
             <button
+              key={`headerMobil${theSection.slug}Button`}
               type="button"
               onClick={(e) => {
                 e.target.focus();
@@ -303,6 +307,7 @@ export default function Header() {
                   ? theSection.headerCols.map((headerCol) => (
                       // eslint-disable-next-line react/jsx-indent
                       <a
+                        key={`headerMobil${theSection.slug}-${headerCol.slug}Route`}
                         href={headerCol.url}
                         className="w-full py-1 text-gray-700"
                       >
@@ -314,6 +319,7 @@ export default function Header() {
             </button>
           ) : (
             <a
+              key={`headerMobil${theSection.slug}Route`}
               href={theSection.url}
               className="w-full outline-none mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 mt-5 border-b border-gray-300 pb-2 text-left "
             >
@@ -322,8 +328,6 @@ export default function Header() {
           ),
       ),
     );
-
-    // eslint-disable-next-line function-paren-newline
 
     setHeaderSections(
       headerButtons.map((theSection) => (
