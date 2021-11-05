@@ -341,7 +341,13 @@ export default function Header() {
         changeHeaderBG('scroll');
       }
       if (sideBarToggle.current.checked !== true) {
-        prevScroll >= window.scrollY ? changeHeader(true) : changeHeader(false);
+        prevScroll >= window.scrollY
+          ? changeHeader(true)
+          : () => {
+              if (!window.scrollY < 0 && window.scrollY !== 0) {
+                changeHeader(false);
+              }
+            };
       }
     };
 
