@@ -287,6 +287,9 @@ export default function Header() {
       headerButtons.map((theSection) => (
         <button
           type="button"
+          onClick={(e) => {
+            e.target.focus();
+          }}
           className="w-full mobil-header-category focus:text-blue-500 focus:border-blue-500 flex flex-wrap transition-all duration-500 pt-5 border-b border-gray-300 pb-2  text-left "
         >
           <div>{theSection.text}</div>
