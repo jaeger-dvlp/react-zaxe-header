@@ -5,6 +5,14 @@ function App() {
   return (
     <div>
       <Header />
+      <div
+        className="w-full min-h-screen "
+        style={{
+          backgroundImage: 'url(./bg.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+      />
     </div>
   );
 }
