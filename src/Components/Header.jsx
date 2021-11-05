@@ -23,11 +23,13 @@ export default function Header() {
   );
 
   const [headerElements, setHeaderElements] = useState(null);
-
   const [headerSections, setHeaderSections] = useState(null);
+  const [headerMobilElements, setHeaderMobilElements] = useState(null);
 
   const header = useRef();
   const headerSection = useRef();
+  const sideBarToggle = useRef();
+  const sideBar = useRef();
   const [logo, setLogo] = useState(ZaxeLogoWhite);
 
   useEffect(() => {
@@ -201,12 +203,34 @@ export default function Header() {
 
     const changeHeader = (status) => {
       deactivateAllSections();
+
       status === false
         ? (header.current.style.top = `-${header.current.offsetHeight}px`)
         : (header.current.style.top = '0px');
 
       prevScroll = window.scrollY;
     };
+
+    const activateSideBar = () => {
+      sideBar.current.style.height = '100vh';
+    };
+    const disableSideBar = () => {
+      sideBar.current.style.height = '0px';
+    };
+
+    console.log(headerMobilElements);
+
+    sideBarToggle.current.addEventListener('change', () => {
+      if (sideBarToggle.current.checked === true) {
+        changeHeaderBG('section', true);
+        activateSideBar();
+      } else {
+        disableSideBar();
+        prevScroll <= 900
+          ? changeHeaderBG('section', false)
+          : changeHeaderBG('section', true);
+      }
+    });
 
     setHeaderElements(
       // eslint-disable-next-line no-confusing-arrow
@@ -250,6 +274,8 @@ export default function Header() {
         // eslint-disable-next-line function-paren-newline
       ),
     );
+
+    setHeaderMobilElements();
 
     setHeaderSections(
       headerSectionsToGo.map((theSection) => (
@@ -307,19 +333,32 @@ export default function Header() {
       });
     };
     window.onscroll = () => {
+      sideBar.current.style.top = `${
+        header.current.offsetHeight + parseInt(header.current.style.top, 10)
+      }px`;
+
       leaveAllFocuses();
-      changeHeaderBG('scroll');
-      // eslint-disable-next-line no-unused-expressions
-      prevScroll >= window.scrollY ? changeHeader(true) : changeHeader(false);
+
+      if (window.innerWidth <= 768 && sideBarToggle.current.checked !== false) {
+        null;
+      } else {
+        changeHeaderBG('scroll');
+      }
+      if (sideBarToggle.current.checked !== true) {
+        prevScroll >= window.scrollY ? changeHeader(true) : changeHeader(false);
+      }
     };
 
     window.onload = () => {
+      sideBarToggle.current.checked = false;
       changeHeaderBG('scroll');
     };
 
     window.onresize = () => {
+      sideBarToggle.current.checked = false;
       leaveAllFocuses();
       deactivateAllSections();
+      disableSideBar();
     };
     window.onclick = (e) => {
       if (e.target.classList.contains('header-sect-clickable') === false) {
@@ -340,7 +379,7 @@ export default function Header() {
             className="lg:hidden xl:hidden flex flex-col"
             htmlFor="navmeMenuCheck"
           >
-            <input type="checkbox" id="navmeMenuCheck" />
+            <input ref={sideBarToggle} type="checkbox" id="navmeMenuCheck" />
             <span className="bg-current" />
             <span className="bg-current" />
             <span className="bg-current" />
@@ -373,7 +412,12 @@ export default function Header() {
           {headerElements}
         </div>
       </div>
-
+      <div
+        ref={sideBar}
+        className="w-full fixed overflow-hidden left-0 lg:hidden xl:hidden flex flex-wrap bg-white transition-all duration-300 "
+      >
+        a
+      </div>
       {headerSections}
     </>
   );
