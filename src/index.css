@@ -4,148 +4,152 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body {
-  min-height: 7000px;
-}
+@layer utilities {
+  body {
+    min-height: 7000px;
+  }
 
-* {
-  font-family: Montserrat;
-}
+  * {
+    font-family: Montserrat;
+  }
 
-.zaxe-header {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  -webkit-transition: all 0.2s, background-color 0.4s !important;
-  -ms-transition: all 0.2s, background-color 0.4s !important;
-  transition: all 0.2s, background-color 0.4s !important;
-}
+  .zaxe-header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    -webkit-transition: all 0.2s, background-color 0.4s !important;
+    -ms-transition: all 0.2s, background-color 0.4s !important;
+    transition: all 0.2s, background-color 0.4s !important;
+  }
 
-.header-section {
-  position: fixed;
-  top: -800px;
-  left: 0px;
-  -webkit-transition: all 0.5s !important;
-  -ms-transition: all 0.5s !important;
-  transition: all 0.5s !important;
-}
+  .header-section {
+    position: fixed;
+    top: -800px;
+    left: 0px;
+    -webkit-transition: all 0.5s !important;
+    -ms-transition: all 0.5s !important;
+    transition: all 0.5s !important;
+  }
 
-.zaxe-header,
-.zaxe-header * {
-  transition: all 0.4s;
-}
-.header-section-button {
-  font-weight: 500;
-  transition: all 0.2s !important;
-  -webkit-transition: all 0.2s !important;
-  -ms-transition: all 0.2s !important;
-}
+  .zaxe-header {
+    transition: all 0.4s;
+  }
 
-.header-button-border {
-  width: 0.1px;
-  background-color: #009ade;
-  height: 2px;
-}
+  .header-section-button {
+    font-weight: 500;
+    transition: all 0.2s !important;
+    -webkit-transition: all 0.2s !important;
+    -ms-transition: all 0.2s !important;
+  }
 
-.header-section-button:hover {
-  color: #009ade;
-}
+  .header-button-border {
+    width: 0.1px;
+    background-color: #009ade;
+    height: 2px;
+    transition: all 0.2s !important;
+    -webkit-transition: all 0.2s !important;
+    -ms-transition: all 0.2s !important;
+  }
 
-.header-section-button:focus {
-  color: #009ade;
-}
+  .header-section-button:hover {
+    color: #009ade;
+  }
 
-.header-section-button .header-button-border {
-  width: 0px !important;
-  display: block !important;
-  height: 2px !important;
-  background-color: #009ade;
-}
+  .header-section-button:focus {
+    color: #009ade;
+  }
 
-.header-section-button:hover .header-button-border {
-  width: 100% !important;
-}
+  .header-section-button .header-button-border {
+    width: 0px !important;
+    display: block !important;
+    height: 2px !important;
+    background-color: #009ade;
+  }
 
-.header-section-button:focus .header-button-border {
-  width: 100% !important;
-}
+  .header-section-button:hover .header-button-border {
+    width: 100% !important;
+  }
 
-.zaxe-header label {
-  width: 33px;
-  cursor: pointer;
-}
+  .header-section-button:focus .header-button-border {
+    width: 100% !important;
+  }
 
-.zaxe-header label span {
-  border-radius: 10px;
-  height: 3px;
-  margin: 3.3px 0;
-  transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-}
+  .zaxe-header label {
+    width: 33px;
+    cursor: pointer;
+  }
 
-.zaxe-header span:nth-of-type(1) {
-  width: 50%;
-}
+  .zaxe-header label span {
+    border-radius: 10px;
+    height: 3px;
+    margin: 3.3px 0;
+    transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
 
-.zaxe-header span:nth-of-type(2) {
-  width: 100%;
-}
+  .zaxe-header span:nth-of-type(1) {
+    width: 50%;
+  }
 
-.zaxe-header span:nth-of-type(3) {
-  width: 75%;
-}
+  .zaxe-header span:nth-of-type(2) {
+    width: 100%;
+  }
 
-.zaxe-header input[type='checkbox'] {
-  display: none;
-}
+  .zaxe-header span:nth-of-type(3) {
+    width: 75%;
+  }
 
-.zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(1) {
-  transform-origin: bottom;
-  transform: rotatez(45deg) translate(4px, 0px);
-}
+  .zaxe-header input[type='checkbox'] {
+    display: none;
+  }
 
-.zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(2) {
-  transform-origin: top;
-  transform: rotatez(-45deg);
-}
+  .zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(1) {
+    transform-origin: bottom;
+    transform: rotatez(45deg) translate(4px, 0px);
+  }
 
-.zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(3) {
-  transform-origin: bottom;
-  width: 50%;
-  transform: translate(15px, -5px) rotatez(45deg);
-}
+  .zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(2) {
+    transform-origin: top;
+    transform: rotatez(-45deg);
+  }
 
-/* !!  HEADER COLS !! */
+  .zaxe-header input[type='checkbox']:checked ~ span:nth-of-type(3) {
+    transform-origin: bottom;
+    width: 50%;
+    transform: translate(15px, -5px) rotatez(45deg);
+  }
 
-.header-col,
-.header-col * {
-  transition: all 0.2s;
-}
+  /* !!  HEADER COLS !! */
 
-.header-col div.header-col-content-head {
-  font-size: 1.5rem;
-}
-
-.header-col button.header-col-button {
-  background-color: #009ade;
-  color: white;
-  font-weight: 500;
-}
-
-.header-col button.header-col-button:hover {
-  background-color: black;
-  color: white;
-}
-
-@media only screen and (max-width: 1920px) {
-  .header-col div.header-col-content {
-    font-size: calc(1vw - 0.3rem) !important;
+  .header-col {
+    transition: all 0.2s;
   }
 
   .header-col div.header-col-content-head {
-    font-size: calc(1.5vw - 0.3rem) !important;
+    font-size: 1.5rem;
   }
 
   .header-col button.header-col-button {
-    font-size: calc(1vw - 0.1rem) !important;
+    background-color: #009ade;
+    color: white;
+    font-weight: 500;
+  }
+
+  .header-col button.header-col-button:hover {
+    background-color: black;
+    color: white;
+  }
+
+  @media only screen and (max-width: 1920px) {
+    .header-col div.header-col-content {
+      font-size: calc(1vw - 0.3rem) !important;
+    }
+
+    .header-col div.header-col-content-head {
+      font-size: calc(1.5vw - 0.3rem) !important;
+    }
+
+    .header-col button.header-col-button {
+      font-size: calc(1vw - 0.1rem) !important;
+    }
   }
 }
